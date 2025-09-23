@@ -221,4 +221,1076 @@
   <script src="js/about.js"></script>
   <script src="js/discover.js"></script>
 </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover - SoleConnect</title>
+  <style>
+    /* Reset and base styles - matching your design exactly */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Archivo', Arial, sans-serif;
+      line-height: 1.6;
+      color: #2d2d2d;
+      overflow-x: hidden;
+      background-color: #ffffff;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Layout components */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    
+    .section-container {
+      width: 100%;
+      max-width: 1298px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    .header {
+      background-color: #ffffff;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 22px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1302px;
+      margin: 0 auto;
+    }
+    
+    .logo {
+      font-size: 18px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      color: #0066ff;
+    }
+    
+    .nav-menu {
+      display: none;
+      gap: 44px;
+      align-items: center;
+    }
+    
+    .nav-item {
+      font-size: 18px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      color: #000000;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-item:hover {
+      color: #0066ff;
+    }
+    
+    .header-icons {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    
+    .header-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .header-icon:hover {
+      transform: scale(1.1);
+    }
+    
+    .hamburger {
+      display: block;
+      width: 24px;
+      height: 24px;
+      background: #000;
+      border-radius: 2px;
+      position: relative;
+    }
+    
+    .hamburger::before, .hamburger::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #000;
+      left: 0;
+      transition: all 0.3s;
+    }
+    
+    .hamburger::before {
+      top: 6px;
+    }
+    
+    .hamburger::after {
+      bottom: 6px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 50vh;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: #000000;
+      padding: 0 16px;
+      max-width: 940px;
+    }
+    
+    .hero-title {
+      font-size: 32px;
+      font-family: 'Archivo Black', sans-serif;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    
+    .hero-subtitle {
+      font-size: 14px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    
+    /* Section Styling */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 42px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .section-title-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .section-title {
+      font-size: 28px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      line-height: 1.1;
+      color: #000000;
+      margin-bottom: 4px;
+    }
+    
+    .title-underline {
+      width: 100%;
+      height: 6px;
+      background-color: #ccff00;
+      margin-top: -2px;
+    }
+    
+    .view-all {
+      font-size: 18px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      color: #000000;
+      transition: color 0.3s ease;
+    }
+    
+    .view-all:hover {
+      color: #0066ff;
+    }
+    
+    /* Product Slider - From your home page */
+    .slider-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .slider-control {
+      background-color: #2d2d2d;
+      border-radius: 14px;
+      padding: 8px;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .slider-control:hover {
+      background-color: #0066ff;
+      transform: scale(1.05);
+    }
+    
+    .slider-control img {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .products-slider {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex: 1;
+    }
+    
+    .products-slider::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      flex-shrink: 0;
+      width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 18px 18px 0 0;
+    }
+    
+    .product-info {
+      background-color: #f5f5f5;
+      padding: 8px;
+      border-radius: 0 0 8px 8px;
+      text-align: center;
+    }
+    
+    .product-brand {
+      font-size: 10px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      color: #7d7d7d;
+      margin-bottom: 2px;
+    }
+    
+    .product-name {
+      font-size: 20px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      color: #2d2d2d;
+    }
+    
+    /* Discover Grid */
+    .discover-section {
+      background-color: #ffffff;
+      padding: 64px 0;
+    }
+    
+    .discover-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    
+    .discover-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .discover-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .discover-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .discover-content {
+      padding: 20px;
+    }
+    
+    .discover-category {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0066ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    
+    .discover-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    
+    .discover-excerpt {
+      font-size: 14px;
+      color: #7d7d7d;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    
+    .discover-link {
+      display: inline-flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0066ff;
+      transition: color 0.3s ease;
+    }
+    
+    .discover-link:hover {
+      color: #0047b3;
+    }
+    
+    .discover-link::after {
+      content: '→';
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+    
+    .discover-link:hover::after {
+      transform: translateX(3px);
+    }
+    
+    /* Filter Section */
+    .filter-section {
+      background-color: #f5f5f5;
+      padding: 32px 0;
+    }
+    
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    
+    .filter-button {
+      background-color: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d2d2d;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-button:hover, .filter-button.active {
+      background-color: #0066ff;
+      color: #ffffff;
+      border-color: #0066ff;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 80px 0;
+      background-color: #f5f5f5;
+    }
+    
+    .cta-title {
+      font-size: 28px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      color: #000000;
+      line-height: 1.1;
+      margin-bottom: 26px;
+    }
+    
+    .cta-button {
+      background-color: #0066ff;
+      color: #f5f5f5;
+      font-size: 18px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      padding: 16px 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      background-color: #0052cc;
+      transform: translateY(-2px);
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #2d2d2d;
+      color: #f5f5f5;
+      padding: 34px 0;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .footer-logo {
+      font-size: 18px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      color: #0066ff;
+      margin-bottom: 24px;
+    }
+    
+    .footer-title {
+      font-size: 16px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      color: #f5f5f5;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-link {
+      font-size: 16px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      color: #f5f5f5;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: #ccff00;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: scale(1.2);
+    }
+    
+    .copyright {
+      font-size: 16px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      color: #ffffff;
+      text-align: center;
+      margin-top: 34px;
+    }
+    
+    /* Interactive states */
+    .nav-item:focus,
+    .header-icon:focus,
+    .view-all:focus,
+    .cta-button:focus,
+    .footer-link:focus {
+      outline: 2px solid #0066ff;
+      outline-offset: 2px;
+    }
+    
+    .cta-button:active {
+      transform: scale(0.95);
+    }
+    
+    /* Responsive media queries */
+    @media (min-width: 640px) {
+      .container {
+        padding: 0 24px;
+      }
+      
+      .section-container {
+        padding: 0 24px;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+      
+      .nav-item {
+        font-size: 20px;
+      }
+      
+      .header-icons {
+        gap: 32px;
+      }
+      
+      .header-icon {
+        width: 24px;
+        height: 24px;
+      }
+      
+      .hero-section {
+        height: 60vh;
+      }
+      
+      .hero-title {
+        font-size: 48px;
+      }
+      
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      
+      .section-title {
+        font-size: 32px;
+      }
+      
+      .view-all {
+        font-size: 20px;
+      }
+      
+      .product-card {
+        width: 300px;
+      }
+      
+      .product-image {
+        height: 220px;
+      }
+      
+      .product-brand {
+        font-size: 11px;
+      }
+      
+      .product-name {
+        font-size: 24px;
+      }
+      
+      .discover-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .discover-image {
+        height: 180px;
+      }
+      
+      .cta-title {
+        font-size: 32px;
+      }
+      
+      .cta-button {
+        font-size: 20px;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 48px;
+      }
+      
+      .footer-title {
+        font-size: 18px;
+      }
+      
+      .footer-link {
+        font-size: 18px;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 32px;
+      }
+      
+      .section-container {
+        padding: 0 32px;
+      }
+      
+      .hamburger {
+        display: none;
+      }
+      
+      .nav-menu {
+        display: flex;
+      }
+      
+      .logo {
+        font-size: 22px;
+      }
+      
+      .nav-item {
+        font-size: 22px;
+      }
+      
+      .header-icons {
+        gap: 40px;
+      }
+      
+      .header-icon {
+        width: 26px;
+        height: 26px;
+      }
+      
+      .hero-section {
+        height: 70vh;
+      }
+      
+      .hero-title {
+        font-size: 56px;
+      }
+      
+      .hero-subtitle {
+        font-size: 17px;
+      }
+      
+      .section-title {
+        font-size: 36px;
+      }
+      
+      .view-all {
+        font-size: 22px;
+      }
+      
+      .product-card {
+        width: 310px;
+      }
+      
+      .product-image {
+        height: 240px;
+      }
+      
+      .product-brand {
+        font-size: 12px;
+      }
+      
+      .product-name {
+        font-size: 28px;
+      }
+      
+      .discover-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .discover-image {
+        height: 200px;
+      }
+      
+      .discover-title {
+        font-size: 22px;
+      }
+      
+      .cta-title {
+        font-size: 36px;
+      }
+      
+      .cta-button {
+        font-size: 22px;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .logo {
+        font-size: 24px;
+      }
+      
+      .nav-item {
+        font-size: 24px;
+      }
+      
+      .header-icon {
+        width: 28px;
+        height: 28px;
+      }
+      
+      .hero-section {
+        height: 80vh;
+      }
+      
+      .hero-title {
+        font-size: 64px;
+      }
+      
+      .hero-subtitle {
+        font-size: 18px;
+      }
+      
+      .section-title {
+        font-size: 40px;
+      }
+      
+      .view-all {
+        font-size: 24px;
+      }
+      
+      .product-card {
+        width: 310px;
+      }
+      
+      .product-image {
+        height: 276px;
+        border-radius: 18px 18px 0 0;
+      }
+      
+      .product-brand {
+        font-size: 12px;
+      }
+      
+      .product-name {
+        font-size: 32px;
+      }
+      
+      .discover-image {
+        height: 220px;
+      }
+      
+      .cta-title {
+        font-size: 40px;
+      }
+      
+      .cta-button {
+        font-size: 24px;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+      <div class="header-content">
+        <nav class="nav-menu">
+          <a href="index.html" class="logo">SoleConnect</a>
+          <a href="#" class="nav-item">New In</a>
+          <a href="#" class="nav-item">Brands</a>
+          <a href="discover.html" class="nav-item">Discover</a>
+          <a href="#" class="nav-item">Sale</a>
+          <a href="about.html" class="nav-item">About</a>
+        </nav>
+        <div class="hamburger"></div>
+        <div class="header-icons">
+          <img src="../assets/images/img_vector.svg" alt="Search" class="header-icon">
+          <img src="../assets/images/img_vector_black_900.svg" alt="Wishlist" class="header-icon">
+          <img src="../assets/images/img_vector_black_900_26x26.svg" alt="Cart" class="header-icon">
+          <img src="../assets/images/img_vector_26x26.svg" alt="Account" class="header-icon">
+        </div>
+      </div>
+    </header>
+
+  <main>
+    <section class="hero-section" aria-label="Discover sneaker culture">
+      <div class="hero-content">
+        <h1 class="hero-title">Discover the Culture</h1>
+        <p class="hero-subtitle">Explore sneaker stories, styling tips, and community highlights</p>
+      </div>
+    </section>
+
+    <section class="filter-section" aria-label="Filter content">
+      <div class="section-container">
+        <div class="filter-container">
+          <button class="filter-button active">All</button>
+          <button class="filter-button">Care Guides</button>
+          <button class="filter-button">Style Tips</button>
+          <button class="filter-button">Brand Stories</button>
+          <button class="filter-button">Community</button>
+          <button class="filter-button">New Releases</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="discover-section" aria-label="Discover content">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-title-container">
+            <h2 class="section-title">Featured Stories</h2>
+            <div class="title-underline"></div>
+          </div>
+          <a href="#" class="view-all">View all</a>
+        </div>
+        
+        <div class="discover-grid">
+          <article class="discover-card">
+            <img src="https://images.unsplash.com/photo-1556906781-2a4128782aa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sneaker care tips" class="discover-image">
+            <div class="discover-content">
+              <span class="discover-category">Care Guide</span>
+              <h3 class="discover-title">How to Keep Your Sneakers Looking Fresh</h3>
+              <p class="discover-excerpt">Learn the best practices for cleaning and maintaining your sneakers to extend their lifespan and keep them looking brand new.</p>
+              <a href="#" class="discover-link">Read more</a>
+            </div>
+          </article>
+          
+          <article class="discover-card">
+            <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sneaker history" class="discover-image">
+            <div class="discover-content">
+              <span class="discover-category">History</span>
+              <h3 class="discover-title">The Evolution of Sneaker Culture</h3>
+              <p class="discover-excerpt">From basketball courts to fashion runways, explore how sneakers became a global phenomenon and cultural statement.</p>
+              <a href="#" class="discover-link">Read more</a>
+            </div>
+          </article>
+          
+          <article class="discover-card">
+            <img src="https://images.unsplash.com/photo-1543512214-318c7553f230?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sneaker styling" class="discover-image">
+            <div class="discover-content">
+              <span class="discover-category">Style Guide</span>
+              <h3 class="discover-title">5 Ways to Style Your Favorite Sneakers</h3>
+              <p class="discover-excerpt">Discover creative ways to incorporate your sneakers into various outfits, from casual to semi-formal looks.</p>
+              <a href="#" class="discover-link">Read more</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="discover-section" aria-label="Featured sneakers">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-title-container">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="title-underline"></div>
+          </div>
+          <a href="index.html" class="view-all">View all</a>
+        </div>
+        
+        <div class="slider-container">
+          <button class="slider-control" id="prevBtn" aria-label="Previous products">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          
+          <div class="products-slider" id="productsSlider">
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Puma Palermo sneakers" class="product-image">
+              <div class="product-info">
+                <p class="product-brand">Puma</p>
+                <h3 class="product-name">Palermo</h3>
+              </div>
+            </article>
+            
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Adidas Originals Samba OG sneakers" class="product-image">
+              <div class="product-info">
+                <p class="product-brand">Adidas Originals</p>
+                <h3 class="product-name">Samba OG</h3>
+              </div>
+            </article>
+            
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Nike Dunk Low sneakers" class="product-image">
+              <div class="product-info">
+                <p class="product-brand">Nike</p>
+                <h3 class="product-name">Dunk Low</h3>
+              </div>
+            </article>
+            
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Asics Japan S sneakers" class="product-image">
+              <div class="product-info">
+                <p class="product-brand">Asics</p>
+                <h3 class="product-name">Japan S</h3>
+              </div>
+            </article>
+          </div>
+          
+          <button class="slider-control" id="nextBtn" aria-label="Next products">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" aria-label="Join our community">
+      <div class="section-container">
+        <h2 class="cta-title">Discover your next favorite pair</h2>
+        <button class="cta-button">Browse Collection</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">SoleConnect</div>
+          <div>
+            <h4 class="footer-title">Information</h4>
+            <nav class="footer-links" aria-label="Information links">
+              <a href="about.html" class="footer-link">About Us</a>
+              <a href="#" class="footer-link">Contact Us</a>
+              <a href="index.html#brands" class="footer-link">Brands</a>
+              <a href="discover.html" class="footer-link">Blogs</a>
+            </nav>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-title">Quick Links</h4>
+          <nav class="footer-links" aria-label="Quick links">
+            <a href="#" class="footer-link">Help Center</a>
+            <a href="#" class="footer-link">FAQ</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Collaborate with Us</a>
+          </nav>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-title">Follow Us</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="Instagram">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.555.556.9 1.112 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"></path>
+              </svg>
+            </a>
+            <a href="#" aria-label="Pinterest">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.6 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"></path>
+              </svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+              </svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <p class="copyright">© 2025 SoleConnect. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    hamburger.addEventListener('click', () => {
+      const isOpen = navMenu.style.display === 'flex';
+      navMenu.style.display = isOpen ? 'none' : 'flex';
+      
+      // Animate hamburger to X
+      if (isOpen) {
+        hamburger.style.transform = 'rotate(0deg)';
+      } else {
+        hamburger.style.transform = 'rotate(90deg)';
+      }
+    });
+    
+    // Product slider functionality
+    const slider = document.getElementById('productsSlider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    let scrollAmount = 0;
+    const cardWidth = 326; // 310px + 16px gap
+    
+    nextBtn.addEventListener('click', () => {
+      scrollAmount += cardWidth;
+      if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+        scrollAmount = slider.scrollWidth - slider.clientWidth;
+      }
+      slider.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      scrollAmount -= cardWidth;
+      if (scrollAmount < 0) {
+        scrollAmount = 0;
+      }
+      slider.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-button');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        // In a real implementation, you would filter content here
+      });
+    });
+  </script>
+</body>
 </html>
