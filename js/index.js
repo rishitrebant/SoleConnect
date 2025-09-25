@@ -64,3 +64,4 @@ document.querySelectorAll('img').forEach(img => {
     this.innerHTML = 'Image not found';
   });
 });
+
