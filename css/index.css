@@ -131,7 +131,20 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0);
+  object-fit: contain;
+}
+
+.hero-overlay img {
+  /* 1. Force the image to take up all available space in the overlay */
+  width: 100%;
+  height: 100%; 
+  display: block; /* Good practice for images */
+  opacity: 0.6;
+  /* 2. Now that the image has dimensions, object-fit will work. */
+  /* 'cover' scales the image to fill the container while maintaining aspect ratio,
+        cropping the edges if necessary. */
+  object-fit: cover;
 }
 
 .hero-content {
