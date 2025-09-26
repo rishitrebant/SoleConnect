@@ -117,7 +117,6 @@ a {
   position: relative;
   width: 100%;
   height: 60vh;
-  background-image: url('assets/images/img_rectangle_10.png');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -131,19 +130,19 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0);
-  object-fit: contain;
+  /* FIX: Use a semi-transparent background (alpha value < 1). 
+     This is what truly darkens the image consistently.
+  */
+  background: #000000;
 }
 
 .hero-overlay img {
-  /* 1. Force the image to take up all available space in the overlay */
   width: 100%;
   height: 100%; 
-  display: block; /* Good practice for images */
-  opacity: 0.6;
-  /* 2. Now that the image has dimensions, object-fit will work. */
-  /* 'cover' scales the image to fill the container while maintaining aspect ratio,
-        cropping the edges if necessary. */
+  display: block;
+  /* FIX: REMOVE the opacity rule here. Let the overlay handle the darkening. */
+  opacity: 0.6; 
+  
   object-fit: cover;
 }
 
