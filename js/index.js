@@ -50,18 +50,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Add loading states for images
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('load', function() {
-    this.style.opacity = '1';
-  });
-  
-  img.addEventListener('error', function() {
-    this.style.backgroundColor = '#e5e7eb';
-    this.style.display = 'flex';
-    this.style.alignItems = 'center';
-    this.style.justifyContent = 'center';
-    this.innerHTML = 'Image not found';
-  });
-});
 
