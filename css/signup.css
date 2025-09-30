@@ -16,14 +16,12 @@ body {
     padding: 20px;
 }
 
-
-
-.login-container {
+.signup-container {
     width: 100%;
     max-width: 480px;
 }
 
-.login-card {
+.signup-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -31,12 +29,12 @@ body {
     width: 100%;
 }
 
-.login-header {
+.signup-header {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.login-title {
+.signup-title {
     font-size: 32px;
     font-weight: 600;
     color: #2D2D2D;
@@ -53,6 +51,7 @@ body {
 
 .form-group {
     margin-bottom: 24px;
+    position: relative;
 }
 
 .form-label {
@@ -80,21 +79,127 @@ body {
     box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
 }
 
-.form-options {
+.scan-email {
+    position: absolute;
+    right: 12px;
+    top: 38px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #0066FF;
+    background: rgba(0, 102, 255, 0.1);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.scan-email:hover {
+    background: rgba(0, 102, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.scan-email svg {
+    width: 14px;
+    height: 14px;
+}
+
+.password-strength {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.password-strength.show {
+    opacity: 1;
+}
+
+.strength-bar {
+    flex: 1;
+    height: 6px;
+    background: #E5E5E5;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.strength-fill.weak {
+    width: 33%;
+    background: #EF4444;
+}
+
+.strength-fill.medium {
+    width: 66%;
+    background: #F59E0B;
+}
+
+.strength-fill.strong {
+    width: 100%;
+    background: #10B981;
+}
+
+.strength-text {
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 40px;
+}
+
+.strength-text.weak {
+    color: #EF4444;
+}
+
+.strength-text.medium {
+    color: #F59E0B;
+}
+
+.strength-text.strong {
+    color: #10B981;
+}
+
+.password-match {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #10B981;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.password-match.show {
+    opacity: 1;
+}
+
+.password-match svg {
+    width: 14px;
+    height: 14px;
+}
+
+.form-options {
     margin-bottom: 32px;
 }
 
 .checkbox-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     font-size: 14px;
     color: #2D2D2D;
     cursor: pointer;
     position: relative;
     padding-left: 28px;
+    line-height: 1.4;
 }
 
 .checkbox-container input {
@@ -107,11 +212,11 @@ body {
 
 .checkmark {
     position: absolute;
-    top: 0;
+    top: 2px;
     left: 0;
     height: 20px;
     width: 20px;
-    background: url("assets/images/danist-soh-8Vog7qkphbA-unsplash.jpg");
+    background-color: white;
     border: 1px solid #E5E5E5;
     border-radius: 4px;
     transition: all 0.3s ease;
@@ -139,20 +244,19 @@ body {
     display: block;
 }
 
-.forgot-password {
+.checkbox-container a {
     color: #0066FF;
     text-decoration: none;
-    font-size: 14px;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.forgot-password:hover {
+.checkbox-container a:hover {
     color: #0052CC;
     text-decoration: underline;
 }
 
-.login-button {
+.signup-button {
     width: 100%;
     height: 56px;
     background: #0066FF;
@@ -167,8 +271,14 @@ body {
     margin-bottom: 32px;
 }
 
-.login-button:hover {
+.signup-button:hover {
     background: #0052CC;
+}
+
+.signup-button:disabled {
+    background: #E5E5E5;
+    color: #7D7D7D;
+    cursor: not-allowed;
 }
 
 .divider {
@@ -236,31 +346,31 @@ body {
     height: 18px;
 }
 
-.signup-cta {
+.login-cta {
     text-align: center;
     font-size: 14px;
     color: #7D7D7D;
 }
 
-.signup-cta a {
+.login-cta a {
     color: #0066FF;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.signup-cta a:hover {
+.login-cta a:hover {
     color: #0052CC;
     text-decoration: underline;
 }
 
 /* Responsive Design */
 @media (max-width: 480px) {
-    .login-card {
+    .signup-card {
         padding: 32px 24px;
     }
     
-    .login-title {
+    .signup-title {
         font-size: 28px;
     }
     
@@ -268,9 +378,9 @@ body {
         font-size: 28px;
     }
     
-    .form-options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+    .scan-email {
+        position: static;
+        margin-top: 8px;
+        justify-content: center;
     }
 }
