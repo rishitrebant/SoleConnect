@@ -47,109 +47,123 @@
 
     <main class="content-wrapper">
       <section class="product-section">
-        <div class="image-gallery">
-          <div class="image-row">
-            <img src="assets/images/img_palermo_side.png" alt="Puma Palermo sneaker side view" class="product-image">
-            <img src="assets/images/img_palermo_top.png" alt="Puma Palermo sneaker top view" class="product-image">
-          </div>
-          <div class="image-row">
-            <img src="assets/images/img_palermo_rear.png" alt="Puma Palermo sneaker rear view" class="product-image">
-            <img src="assets/images/img_palermo_rear_394x394.png" alt="Puma Palermo sneaker bottom view" class="product-image">
-          </div>
-          <div class="image-row">
-            <img src="assets/images/img_palermo_rear_1.png" alt="Puma Palermo sneaker lifestyle view" class="product-image">
-            <img src="assets/images/img_palermo_diagonal.png" alt="Puma Palermo sneaker diagonal view" class="product-image">
-          </div>
-          <div class="image-row">
-            <img src="assets/images/img_palermo_rear_2.png" alt="Puma Palermo sneaker detail view" class="product-image">
-            <img src="assets/images/img_palermo_rear_3.png" alt="Puma Palermo sneaker on model" class="product-image">
+  <div class="image-gallery-columns">
+    <div class="image-column">
+      <img src="assets/images/img_palermo_side.png" alt="Puma Palermo side view" class="product-image">
+      <img src="assets/images/img_palermo_top.png" alt="Puma Palermo top view" class="product-image">
+      <img src="assets/images/img_palermo_rear.png" alt="Puma Palermo rear view" class="product-image">
+      <img src="assets/images/img_palermo_rear_394x394.png" alt="Puma Palermo bottom view" class="product-image">
+    </div>
+    <div class="image-column">
+      <img src="assets/images/img_palermo_rear_1.png" alt="Puma Palermo lifestyle view" class="product-image">
+      <img src="assets/images/img_palermo_diagonal.png" alt="Puma Palermo diagonal view" class="product-image">
+      <img src="assets/images/img_palermo_rear_2.png" alt="Puma Palermo detail view" class="product-image">
+      <img src="assets/images/img_palermo_rear_3.png" alt="Puma Palermo on model" class="product-image">
+    </div>
+  </div>
+
+  <div class="product-info">
+    <div class="product-header">
+      <div class="brand-name">Puma</div>
+      <h1 class="product-title">Palermo</h1>
+      <div class="product-subtitle">Hyperlink Blue-Flame Flicker-Gum</div>
+      <div class="price-section">
+        <div class="price-label">From</div>
+        <div class="price">₹5,249</div>
+      </div>
+    </div>
+
+    <!-- Step 1: Size Selection -->
+    <div class="selection-step active" id="stepSize">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Select Your Size</h3>
+      </div>
+      <div class="size-selector">
+        <button class="size-option" data-size="7">7</button>
+        <button class="size-option" data-size="8">8</button>
+        <button class="size-option" data-size="9">9</button>
+        <button class="size-option" data-size="10">10</button>
+        <button class="size-option" data-size="11">11</button>
+      </div>
+      <div class="step-instruction">Please select your size to see available vendors</div>
+    </div>
+
+    <!-- Step 2: Vendor Selection (initially hidden) -->
+    <div class="selection-step disabled" id="stepVendor">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Choose a Vendor</h3>
+      </div>
+      <div class="retailer-cards">
+        <div class="retailer-card" data-vendor="SoleTrade Mumbai">
+          <div class="best-price-badge">Best Price</div>
+          <div class="retailer-info">
+            <div class="retailer-header">
+              <div class="retailer-name">SoleTrade Mumbai</div>
+              <div class="rating-section">
+                <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
+                <span class="rating-text">4.4</span>
+              </div>
+            </div>
+            <div class="retailer-price">₹5,249</div>
+            <div class="verified-badge">
+              <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
+              <span class="verified-text">Verified</span>
+            </div>
           </div>
         </div>
 
-        <div class="product-info">
-          <div class="product-header">
-            <div class="brand-name">Puma</div>
-            <h1 class="product-title">Palermo</h1>
-            <div class="product-subtitle">Hyperlink Blue-Flame Flicker-Gum</div>
-            <div class="price-section">
-              <div class="price-label">From</div>
-              <div class="price">₹5,249</div>
-            </div>
-          </div>
-
-          <div class="size-selector">
-            <button class="size-option" data-size="7">7</button>
-            <button class="size-option" data-size="8">8</button>
-            <button class="size-option" data-size="9">9</button>
-            <button class="size-option" data-size="10">10</button>
-            <button class="size-option" data-size="11">11</button>
-          </div>
-
-          <div class="retailer-cards">
-            <div class="retailer-card">
-              <div class="retailer-info">
-                <div class="retailer-header">
-                  <div class="retailer-name">SoleTrade Mumbai</div>
-                  <div class="rating-section">
-                    <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
-                    <span class="rating-text">4.4</span>
-                  </div>
-                </div>
-                <div class="retailer-price">₹5,249</div>
-                <div class="verified-badge">
-                  <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
-                  <span class="verified-text">Verified</span>
-                </div>
+        <div class="retailer-card" data-vendor="Velocity Kicks">
+          <div class="retailer-info">
+            <div class="retailer-header">
+              <div class="retailer-name">Velocity Kicks</div>
+              <div class="rating-section">
+                <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
+                <span class="rating-text">4.6</span>
               </div>
             </div>
-
-            <div class="retailer-card">
-              <div class="retailer-info">
-                <div class="retailer-header">
-                  <div class="retailer-name">Velocity Kicks</div>
-                  <div class="rating-section">
-                    <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
-                    <span class="rating-text">4.6</span>
-                  </div>
-                </div>
-                <div class="retailer-price">₹5,999</div>
-                <div class="verified-badge">
-                  <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
-                  <span class="verified-text">Verified</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="retailer-card">
-              <div class="retailer-info">
-                <div class="retailer-header">
-                  <div class="retailer-name">StepUp Gurgaon</div>
-                  <div class="rating-section">
-                    <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
-                    <span class="rating-text">4.1</span>
-                  </div>
-                </div>
-                <div class="retailer-price">₹6,999</div>
-                <div class="verified-badge">
-                  <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
-                  <span class="verified-text">Verified</span>
-                </div>
-              </div>
+            <div class="retailer-price">₹5,999</div>
+            <div class="verified-badge">
+              <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
+              <span class="verified-text">Verified</span>
             </div>
           </div>
+        </div>
 
-          <div class="action-buttons">
-            <button class="wishlist-btn" aria-label="Add to wishlist">
-              <img src="assets/images/img_component_18.svg" alt="Wishlist" width="30" height="30">
-            </button>
-            <button class="add-to-cart-btn">Add to Cart</button>
+        <div class="retailer-card" data-vendor="StepUp Gurgaon">
+          <div class="retailer-info">
+            <div class="retailer-header">
+              <div class="retailer-name">StepUp Gurgaon</div>
+              <div class="rating-section">
+                <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
+                <span class="rating-text">4.1</span>
+              </div>
+            </div>
+            <div class="retailer-price">₹6,999</div>
+            <div class="verified-badge">
+              <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
+              <span class="verified-text">Verified</span>
+            </div>
           </div>
+        </div>
+      </div>
+      <div class="step-instruction">Select a vendor to proceed to checkout</div>
+    </div>
 
-          <div class="shipping-info">Free Shipping and Returns</div>
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="wishlist-btn disabled" aria-label="Add to wishlist" id="wishlistBtn" disabled>
+        <img src="assets/images/img_component_18.svg" alt="Wishlist" width="30" height="30">
+      </button>
+      <button class="add-to-cart-btn disabled" id="addToCartBtn" disabled>Add to Cart</button>
+    </div>
 
-          <div class="product-details">
-            <h2 class="details-title">Product Details:</h2>
-            <p class="details-text">The Palermo brings back the timeless appeal of a terrace classic with a vintage silhouette and premium materials. Combining suede<br>
+    <div class="shipping-info">Free Shipping and Returns</div>
+
+    <div class="product-details">
+      <h2 class="details-title">Product Details:</h2>
+      <p class="details-text">The Palermo brings back the timeless appeal of a terrace classic with a vintage silhouette and premium materials. Combining suede<br>
 Style: 402693_07<br>
 Color: Hyperlink Blue-Flame Flicker-Gum<br>
 Material: Suede &amp; Leather<br>
@@ -161,9 +175,9 @@ Heel Type: Flat<br>
 Fastener: Laces<br>
 Toe Type: Rounded<br>
 Profile: Low Boot</p>
-          </div>
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
     </main>
 
     <footer class="footer">
@@ -210,6 +224,6 @@ Profile: Low Boot</p>
   </div>
 
   <script src="js/Product.js"></script>
-  <script src="js/productDetails.js"></script>
+<script src="js/productDetails.js"></script>
 </body>
 </html>

@@ -515,6 +515,214 @@ button {
   outline-offset: 2px;
 }
 
+/* New Two-Column Image Layout */
+.image-gallery-columns {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.image-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.image-column .product-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Step-by-Step Selection Process */
+.selection-step {
+  margin: 24px 0;
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.selection-step.active {
+  background-color: #f8f9fa;
+  border: 2px solid #0066ff;
+}
+
+.selection-step.disabled {
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.selection-step.completed {
+  background-color: #f0fdf4;
+  border: 1px solid #10b981;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background-color: #0066ff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.selection-step.completed .step-number {
+  background-color: #10b981;
+}
+
+.step-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.step-instruction {
+  font-size: 14px;
+  color: #7d7d7d;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* Best Price Badge */
+.best-price-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Retailer Card Selection */
+.retailer-card {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.retailer-card.selected {
+  border-color: #0066ff;
+  background-color: #f0f7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
+}
+
+.retailer-card.best-price {
+  border-color: #10b981;
+  background-color: #f0fdf4;
+}
+
+/* Button States */
+.wishlist-btn.disabled,
+.add-to-cart-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.wishlist-btn:not(.disabled):hover,
+.add-to-cart-btn:not(.disabled):hover {
+  transform: translateY(-2px);
+}
+
+.wishlist-btn.enabled {
+  background-color: #0066ff;
+}
+
+.wishlist-btn.enabled img {
+  filter: brightness(0) invert(1);
+}
+
+.add-to-cart-btn.enabled {
+  background-color: #0066ff;
+  cursor: pointer;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  background-color: #0066ff;
+  transform: scale(1.2);
+}
+
+.progress-dot.completed {
+  background-color: #10b981;
+}
+
+/* Size Selection Enhanced */
+.size-option {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.size-option.selected {
+  background-color: #0066ff;
+  color: white;
+  border-color: #0066ff;
+  transform: scale(1.05);
+}
+
+.size-option:not(.selected):hover {
+  background-color: #f8f9fa;
+  border-color: #0066ff;
+}
+
+/* Responsive adjustments for two-column layout */
+@media (max-width: 768px) {
+  .image-gallery-columns {
+    flex-direction: column;
+  }
+  
+  .image-column {
+    gap: 12px;
+  }
+  
+  .selection-step {
+    padding: 16px;
+  }
+  
+  .step-title {
+    font-size: 18px;
+  }
+}
+
 /* Responsive media queries */
 @media (min-width: 640px) {
   .header {
