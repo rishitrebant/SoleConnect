@@ -47,18 +47,23 @@
 
     <main class="content-wrapper">
       <section class="product-section">
-  <div class="image-gallery-columns">
-    <div class="image-column">
-      <img src="assets/images/img_palermo_side.png" alt="Puma Palermo side view" class="product-image">
-      <img src="assets/images/img_palermo_top.png" alt="Puma Palermo top view" class="product-image">
-      <img src="assets/images/img_palermo_rear.png" alt="Puma Palermo rear view" class="product-image">
-      <img src="assets/images/img_palermo_rear_394x394.png" alt="Puma Palermo bottom view" class="product-image">
+  <!-- Keep your original image layout -->
+  <div class="image-gallery">
+    <div class="image-row">
+      <img src="assets/images/img_palermo_side.png" alt="Puma Palermo sneaker side view" class="product-image">
+      <img src="assets/images/img_palermo_top.png" alt="Puma Palermo sneaker top view" class="product-image">
     </div>
-    <div class="image-column">
-      <img src="assets/images/img_palermo_rear_1.png" alt="Puma Palermo lifestyle view" class="product-image">
-      <img src="assets/images/img_palermo_diagonal.png" alt="Puma Palermo diagonal view" class="product-image">
-      <img src="assets/images/img_palermo_rear_2.png" alt="Puma Palermo detail view" class="product-image">
-      <img src="assets/images/img_palermo_rear_3.png" alt="Puma Palermo on model" class="product-image">
+    <div class="image-row">
+      <img src="assets/images/img_palermo_rear.png" alt="Puma Palermo sneaker rear view" class="product-image">
+      <img src="assets/images/img_palermo_rear_394x394.png" alt="Puma Palermo sneaker bottom view" class="product-image">
+    </div>
+    <div class="image-row">
+      <img src="assets/images/img_palermo_rear_1.png" alt="Puma Palermo sneaker lifestyle view" class="product-image">
+      <img src="assets/images/img_palermo_diagonal.png" alt="Puma Palermo sneaker diagonal view" class="product-image">
+    </div>
+    <div class="image-row">
+      <img src="assets/images/img_palermo_rear_2.png" alt="Puma Palermo sneaker detail view" class="product-image">
+      <img src="assets/images/img_palermo_rear_3.png" alt="Puma Palermo sneaker on model" class="product-image">
     </div>
   </div>
 
@@ -73,12 +78,9 @@
       </div>
     </div>
 
-    <!-- Step 1: Size Selection -->
-    <div class="selection-step active" id="stepSize">
-      <div class="step-header">
-        <div class="step-number">1</div>
-        <h3 class="step-title">Select Your Size</h3>
-      </div>
+    <!-- Size Selection - Keep original design -->
+    <div class="size-section">
+      <h3 class="section-subtitle">Select Size</h3>
       <div class="size-selector">
         <button class="size-option" data-size="7">7</button>
         <button class="size-option" data-size="8">8</button>
@@ -86,18 +88,14 @@
         <button class="size-option" data-size="10">10</button>
         <button class="size-option" data-size="11">11</button>
       </div>
-      <div class="step-instruction">Please select your size to see available vendors</div>
+      <div class="selection-hint" id="sizeHint">Please select your size first</div>
     </div>
 
-    <!-- Step 2: Vendor Selection (initially hidden) -->
-    <div class="selection-step disabled" id="stepVendor">
-      <div class="step-header">
-        <div class="step-number">2</div>
-        <h3 class="step-title">Choose a Vendor</h3>
-      </div>
+    <!-- Vendor Selection - Keep original design -->
+    <div class="vendors-section">
+      <h3 class="section-subtitle">Available Vendors</h3>
       <div class="retailer-cards">
         <div class="retailer-card" data-vendor="SoleTrade Mumbai">
-          <div class="best-price-badge">Best Price</div>
           <div class="retailer-info">
             <div class="retailer-header">
               <div class="retailer-name">SoleTrade Mumbai</div>
@@ -148,15 +146,15 @@
           </div>
         </div>
       </div>
-      <div class="step-instruction">Select a vendor to proceed to checkout</div>
+      <div class="selection-hint" id="vendorHint">Select a vendor to continue</div>
     </div>
 
-    <!-- Action Buttons -->
+    <!-- Action Buttons - Keep original design -->
     <div class="action-buttons">
-      <button class="wishlist-btn disabled" aria-label="Add to wishlist" id="wishlistBtn" disabled>
+      <button class="wishlist-btn" aria-label="Add to wishlist" id="wishlistBtn" disabled>
         <img src="assets/images/img_component_18.svg" alt="Wishlist" width="30" height="30">
       </button>
-      <button class="add-to-cart-btn disabled" id="addToCartBtn" disabled>Add to Cart</button>
+      <button class="add-to-cart-btn" id="addToCartBtn" disabled>Add to Cart</button>
     </div>
 
     <div class="shipping-info">Free Shipping and Returns</div>

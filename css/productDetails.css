@@ -723,6 +723,66 @@ button {
   }
 }
 
+/* Step-by-Step Functionality - Minimal Changes */
+.size-section, .vendors-section {
+  transition: all 0.3s ease;
+}
+
+.vendors-section.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.selection-hint {
+  font-size: 12px;
+  color: #7d7d7d;
+  margin-top: 8px;
+  font-style: italic;
+  min-height: 16px;
+}
+
+/* Best Price Highlight - Green background with white border */
+.retailer-card.best-price {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  border: 2px solid white !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+}
+
+.retailer-card.best-price .retailer-info {
+  color: white;
+}
+
+.retailer-card.best-price .retailer-name,
+.retailer-card.best-price .retailer-price,
+.retailer-card.best-price .rating-text,
+.retailer-card.best-price .verified-text {
+  color: white !important;
+}
+
+.retailer-card.best-price .rating-icon,
+.retailer-card.best-price .verified-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* Vendor Selection - White border */
+.retailer-card.selected {
+  border: 2px solid #0066ff !important;
+  background-color: #f0f7ff !important;
+}
+
+/* Button States */
+.wishlist-btn:disabled,
+.add-to-cart-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.wishlist-btn:not(:disabled):hover,
+.add-to-cart-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
 /* Responsive media queries */
 @media (min-width: 640px) {
   .header {

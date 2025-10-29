@@ -1,11 +1,11 @@
-// Enhanced Product Details Page with Step-by-Step Flow
+// Product Details Page with Step-by-Step Flow (Original Design)
 class ProductDetailsPage {
     constructor() {
         this.productManager = new ProductManager();
         this.currentProduct = null;
         this.selectedSize = null;
         this.selectedVendor = null;
-        this.currentStep = 'size'; // size → vendor → cart
+        this.isBestPriceSelected = false;
         this.init();
     }
 
@@ -13,7 +13,6 @@ class ProductDetailsPage {
         await this.loadProductData();
         this.initializeUI();
         this.initEventListeners();
-        this.updateUIState();
     }
 
     async loadProductData() {
@@ -33,18 +32,21 @@ class ProductDetailsPage {
     }
 
     initializeUI() {
-        // Initially disable everything except size selection
-        this.disableVendorSelection();
+        // Initially disable vendors and buttons
+        this.disableVendors();
         this.disableWishlist();
         this.disableAddToCart();
+        
+        // Update hints
+        this.updateSizeHint('Please select your size first');
+        this.updateVendorHint('Select size to see vendors');
     }
 
     renderProductDetails() {
         if (!this.currentProduct) return;
 
         this.renderProductHeader();
-        this.renderSizeSelector();
-        this.renderVendorCards();
+        this.highlightBestPrice();
     }
 
     renderProductHeader() {
@@ -56,191 +58,45 @@ class ProductDetailsPage {
         document.querySelector('.price').textContent = this.currentProduct.formatPrice(lowestPrice);
     }
 
-    renderSizeSelector() {
-        const sizeSelector = document.querySelector('.size-selector');
-        if (!sizeSelector) return;
-
-        sizeSelector.innerHTML = '';
-
-        this.currentProduct.sizes.forEach(size => {
-            const sizeBtn = document.createElement('button');
-            sizeBtn.className = 'size-option';
-            sizeBtn.textContent = size;
-            sizeBtn.setAttribute('data-size', size);
-            sizeBtn.addEventListener('click', () => this.handleSizeSelection(size));
-            sizeSelector.appendChild(sizeBtn);
-        });
-    }
-
-    renderVendorCards() {
-        const retailerCards = document.querySelector('.retailer-cards');
-        if (!retailerCards) return;
-
-        retailerCards.innerHTML = '';
-
-        // Find the best price
+    highlightBestPrice() {
         const vendors = this.currentProduct.vendors;
         const bestPrice = Math.min(...vendors.map(v => v.price));
-
+        
+        // Find and highlight the vendor with best price
         vendors.forEach(vendor => {
-            const vendorCard = this.createVendorCard(vendor, vendor.price === bestPrice);
-            retailerCards.appendChild(vendorCard);
+            if (vendor.price === bestPrice) {
+                const vendorCard = document.querySelector(`[data-vendor="${vendor.name}"]`);
+                if (vendorCard) {
+                    vendorCard.classList.add('best-price');
+                }
+            }
         });
-    }
-
-    createVendorCard(vendor, isBestPrice = false) {
-        const card = document.createElement('div');
-        card.className = `retailer-card ${isBestPrice ? 'best-price' : ''}`;
-        card.setAttribute('data-vendor', vendor.name);
-        
-        if (isBestPrice) {
-            card.innerHTML = `<div class="best-price-badge">Best Price</div>`;
-        }
-
-        card.innerHTML += `
-            <div class="retailer-info">
-                <div class="retailer-header">
-                    <div class="retailer-name">${vendor.name}</div>
-                    <div class="rating-section">
-                        <img src="assets/images/img_vector_teal_400.svg" alt="Star rating" class="rating-icon">
-                        <span class="rating-text">${vendor.rating}</span>
-                    </div>
-                </div>
-                <div class="retailer-price">${this.currentProduct.formatPrice(vendor.price)}</div>
-                ${vendor.verified ? `
-                <div class="verified-badge">
-                    <img src="assets/images/img_vector_teal_400_12x12.svg" alt="Verified" class="verified-icon">
-                    <span class="verified-text">Verified</span>
-                </div>
-                ` : ''}
-            </div>
-        `;
-
-        card.addEventListener('click', () => this.handleVendorSelection(vendor));
-        return card;
-    }
-
-    handleSizeSelection(size) {
-        // Remove selection from all sizes
-        document.querySelectorAll('.size-option').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        
-        // Add selection to clicked size
-        event.target.classList.add('selected');
-        
-        this.selectedSize = size;
-        this.currentStep = 'vendor';
-        
-        // Enable vendor selection and wishlist
-        this.enableVendorSelection();
-        this.enableWishlist();
-        
-        this.updateUIState();
-        
-        // Show confirmation message
-        this.showMessage(`Size ${size} selected! Now choose a vendor.`, 'success');
-    }
-
-    handleVendorSelection(vendor) {
-        // Remove selection from all vendors
-        document.querySelectorAll('.retailer-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        
-        // Add selection to clicked vendor
-        event.currentTarget.classList.add('selected');
-        
-        this.selectedVendor = vendor;
-        this.currentStep = 'cart';
-        
-        // Enable add to cart
-        this.enableAddToCart();
-        
-        this.updateUIState();
-        
-        // Show confirmation message
-        this.showMessage(`${vendor.name} selected! Ready to add to cart.`, 'success');
-    }
-
-    disableVendorSelection() {
-        const stepVendor = document.getElementById('stepVendor');
-        stepVendor.classList.add('disabled');
-        stepVendor.classList.remove('active', 'completed');
-        
-        document.querySelectorAll('.retailer-card').forEach(card => {
-            card.style.pointerEvents = 'none';
-        });
-    }
-
-    enableVendorSelection() {
-        const stepVendor = document.getElementById('stepVendor');
-        stepVendor.classList.remove('disabled');
-        stepVendor.classList.add('active');
-        
-        document.querySelectorAll('.retailer-card').forEach(card => {
-            card.style.pointerEvents = 'auto';
-        });
-    }
-
-    disableWishlist() {
-        const wishlistBtn = document.getElementById('wishlistBtn');
-        wishlistBtn.classList.add('disabled');
-        wishlistBtn.disabled = true;
-    }
-
-    enableWishlist() {
-        const wishlistBtn = document.getElementById('wishlistBtn');
-        wishlistBtn.classList.remove('disabled');
-        wishlistBtn.disabled = false;
-        wishlistBtn.classList.add('enabled');
-    }
-
-    disableAddToCart() {
-        const addToCartBtn = document.getElementById('addToCartBtn');
-        addToCartBtn.classList.add('disabled');
-        addToCartBtn.disabled = true;
-    }
-
-    enableAddToCart() {
-        const addToCartBtn = document.getElementById('addToCartBtn');
-        addToCartBtn.classList.remove('disabled');
-        addToCartBtn.disabled = false;
-        addToCartBtn.classList.add('enabled');
-    }
-
-    updateUIState() {
-        // Update step indicators
-        const stepSize = document.getElementById('stepSize');
-        const stepVendor = document.getElementById('stepVendor');
-        
-        // Reset all steps
-        stepSize.classList.remove('completed');
-        stepVendor.classList.remove('completed');
-        
-        // Update based on current step
-        switch (this.currentStep) {
-            case 'vendor':
-                stepSize.classList.add('completed');
-                stepVendor.classList.add('active');
-                break;
-            case 'cart':
-                stepSize.classList.add('completed');
-                stepVendor.classList.add('completed');
-                break;
-            default:
-                stepSize.classList.add('active');
-        }
     }
 
     initEventListeners() {
-        // Add to cart functionality
-        const addToCartBtn = document.getElementById('addToCartBtn');
-        addToCartBtn.addEventListener('click', () => this.addToCart());
+        // Size selection
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                this.handleSizeSelection(e.target.dataset.size);
+            });
+        });
 
-        // Wishlist functionality
-        const wishlistBtn = document.getElementById('wishlistBtn');
-        wishlistBtn.addEventListener('click', () => this.toggleWishlist());
+        // Vendor selection
+        document.querySelectorAll('.retailer-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                this.handleVendorSelection(e.currentTarget.dataset.vendor);
+            });
+        });
+
+        // Add to cart
+        document.getElementById('addToCartBtn').addEventListener('click', () => {
+            this.addToCart();
+        });
+
+        // Wishlist
+        document.getElementById('wishlistBtn').addEventListener('click', () => {
+            this.toggleWishlist();
+        });
 
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
@@ -254,9 +110,94 @@ class ProductDetailsPage {
         }
     }
 
+    handleSizeSelection(size) {
+        // Remove selection from all sizes
+        document.querySelectorAll('.size-option').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        
+        // Add selection to clicked size
+        event.target.classList.add('selected');
+        
+        this.selectedSize = size;
+        
+        // Enable vendors and wishlist
+        this.enableVendors();
+        this.enableWishlist();
+        
+        // Update hints
+        this.updateSizeHint(`Size ${size} selected - Now choose a vendor`);
+        this.updateVendorHint('Click on a vendor to select');
+        
+        this.showMessage(`Size ${size} selected! Now choose your preferred vendor.`, 'success');
+    }
+
+    handleVendorSelection(vendorName) {
+        // Remove selection from all vendors
+        document.querySelectorAll('.retailer-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        
+        // Add selection to clicked vendor
+        event.currentTarget.classList.add('selected');
+        
+        this.selectedVendor = this.currentProduct.getVendorByName(vendorName);
+        this.isBestPriceSelected = event.currentTarget.classList.contains('best-price');
+        
+        // Enable add to cart
+        this.enableAddToCart();
+        
+        // Update hints
+        this.updateVendorHint(`${vendorName} selected - Ready to add to cart`);
+        
+        const message = this.isBestPriceSelected ? 
+            `Great choice! ${vendorName} has the best price!` : 
+            `${vendorName} selected!`;
+        
+        this.showMessage(message, 'success');
+    }
+
+    disableVendors() {
+        document.querySelector('.vendors-section').classList.add('disabled');
+        document.querySelectorAll('.retailer-card').forEach(card => {
+            card.style.pointerEvents = 'none';
+        });
+    }
+
+    enableVendors() {
+        document.querySelector('.vendors-section').classList.remove('disabled');
+        document.querySelectorAll('.retailer-card').forEach(card => {
+            card.style.pointerEvents = 'auto';
+        });
+    }
+
+    disableWishlist() {
+        document.getElementById('wishlistBtn').disabled = true;
+    }
+
+    enableWishlist() {
+        document.getElementById('wishlistBtn').disabled = false;
+    }
+
+    disableAddToCart() {
+        document.getElementById('addToCartBtn').disabled = true;
+    }
+
+    enableAddToCart() {
+        document.getElementById('addToCartBtn').disabled = false;
+    }
+
+    updateSizeHint(message) {
+        document.getElementById('sizeHint').textContent = message;
+    }
+
+    updateVendorHint(message) {
+        document.getElementById('vendorHint').textContent = message;
+    }
+
     addToCart() {
         if (!this.selectedSize || !this.selectedVendor) {
-            this.showMessage('Please complete all selection steps.', 'error');
+            this.showMessage('Please select both size and vendor before adding to cart.', 'error');
             return;
         }
 
@@ -264,13 +205,17 @@ class ProductDetailsPage {
             product: this.currentProduct,
             size: this.selectedSize,
             vendor: this.selectedVendor,
-            price: this.selectedVendor.price
+            price: this.selectedVendor.price,
+            isBestPrice: this.isBestPriceSelected
         };
 
         this.saveToCart(cartItem);
         
+        const savingsMessage = this.isBestPriceSelected ? 
+            ` You got the best price! Saved ₹${this.currentProduct.originalPrice - this.selectedVendor.price}!` : '';
+            
         this.showMessage(
-            `Added ${this.currentProduct.brand} ${this.currentProduct.name} (Size: ${this.selectedSize}) from ${this.selectedVendor.name} to cart!`, 
+            `Added ${this.currentProduct.brand} ${this.currentProduct.name} (Size: ${this.selectedSize}) to cart!${savingsMessage}`, 
             'success'
         );
     }
@@ -288,9 +233,13 @@ class ProductDetailsPage {
         
         if (isWishlisted) {
             wishlistBtn.classList.add('wishlisted');
+            wishlistBtn.style.backgroundColor = '#0066ff';
+            wishlistBtn.querySelector('img').style.filter = 'brightness(0) invert(1)';
             this.addToWishlist();
         } else {
             wishlistBtn.classList.remove('wishlisted');
+            wishlistBtn.style.backgroundColor = '#f5f5f5';
+            wishlistBtn.querySelector('img').style.filter = 'none';
             this.removeFromWishlist();
         }
     }
